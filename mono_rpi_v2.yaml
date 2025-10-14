@@ -1,0 +1,62 @@
+%YAML:1.0
+# ---- Camera (Pi Cam V2 640x480) ----
+Camera.type: "PinHole"
+Camera.width: 640
+Camera.height: 480
+Camera.fx: 520.0         # use your calibrated values when you have them
+Camera.fy: 520.0
+Camera.cx: 320.0
+Camera.cy: 240.0
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
+Camera.k3: 0.0
+Camera.fps: 15
+Camera.RGB: 1
+Camera.bf: 0.0
+
+# ---- ORB (a bit heavier = better features) ----
+ORBextractor.nFeatures: 1100   # try 1000–1200 depending on CPU
+ORBextractor.scaleFactor: 1.2
+ORBextractor.nLevels: 8
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+# ---- Viewer (required keys) ----
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 1
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3
+Viewer.ViewpointX: 0.0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500.0
+
+
+
+# ========= IMU (REQUIRED) =========
+# Camera(left) -> IMU extrinsics (Tbc). Use identity until you calibrate.
+Tbc: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: f
+   data: [ 1, 0, 0, 0,
+           0, 1, 0, 0,
+           0, 0, 1, 0,
+           0, 0, 0, 1 ]
+
+IMU.Frequency: 200          # integer, no quotes
+IMU.NoiseGyro: 1.7e-3       # rad/s/sqrt(Hz)   (set to your sensor)
+IMU.NoiseAcc:  2.0e-2       # m/s^2/sqrt(Hz)
+IMU.GyroWalk:  1.0e-5       # rad/s^2/sqrt(Hz)
+IMU.AccWalk:   1.0e-3       # m/s^3/sqrt(Hz)
+
+
+#RVIZ VSLAM
+# --- add these lines ---
+System.SaveAtlasToFile: "/home/antonie/maps/office_atlas"   # will write office_atlas.osa on shutdown
+System.LoadAtlasFromFile: ""                                 # leave empty on first run
+
